@@ -1,0 +1,27 @@
+.myHeader {
+    display: flex;
+    height: 100vh;
+    align-items: flex-end;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.mySmallHeader {
+    display: flex;
+    height: 60vh;
+    align-items: flex-end;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.myQuizImage:hover {
+    opacity: 0.3;
+}
+
+.myOpacity {
+    opacity: 0.3;
+}

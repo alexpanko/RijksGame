@@ -3,33 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>How well do you know famous dutch artists and their masterpieces? Quiz game.</title>
+    <title>How well do you know famous Dutch artists and their masterpieces? Quiz game.</title>
     <!-- BOOTSTRAP -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!-- MY STYLESHEET -->
     <link rel="stylesheet" href="style.css">
+    <!-- FONTAWESOME -->
+    <script src="https://kit.fontawesome.com/29478703da.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
-    <!-- QUIZ QUESTION -->
-    <section class="container">
+    <!-- 1.START HERO & QUIZ INTRO-->
+    <section id="myHeroSection">
+        <!-- 1.1.START HERO -->
+        <div class="jumbotron jumbotron-fluid myHeader pb-1" style="background-image: url(images/hero-dark.jpg);">
+            <div class="container">
+              <h1 class="display-4 text-light">How well do you know famous Dutch artists and their masterpieces?</h1>
+              <p class="text-center display-4"><a href="#quizIntro"><i class="fas fa-arrow-circle-down text-light"></i></a></p>
+            </div>
+        </div>
+        <!-- 1.2.QUIZ INTRO -->
+        <div id="quizIntro" class="container pb-5">
+            <div class="row pt-5">
+                <div class="col">
+                    <h3>Take the quiz to test your knowledge!</h3>
+                    <p class="my-5">This quiz game is created thanks to <a href="href="https://www.rijksmuseum.nl/en/data/policy">The Rijksmuseum Open Data Policy</a>.</p>
+                </div>
+            </div>
+            <div class="row py-2">
+                <div class="col text-center">
+                    <button id="myStartQuizButton" type="button" class="btn btn-primary btn-lg px-5">Take the Quiz</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 2.QUIZ QUESTION -->
+    <section id="myQuizSection" class="container d-none">
         <div class="row">
-            <div class="col text-center">
+            <div class="col text-center my-5">
                 <h3>POINTS: 0</h3>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <h1>Rembrandt van Rijn</h1>
+                <h4>Rembrandt van Rijn</h4>
                 <p>
                     Rembrandt van Rijn (1606-1669) was born in Leiden, the son of a miller. After finishing Latin School, his parents enrolled him at Leiden University. Rembrandt soon dropped out and became an apprentice painter under Jacob van Swanenburch in Leiden, and later Pieter Lastman in Amsterdam. Back in Leiden, he set up as an independent artist together with Jan Lievens. At this time, Rembrandt mainly painted biblical scenes in a precise style and with vibrant colours.
                 </p>
                 <div class="collapse" id="collapse">
                     <p>
-                        In 1631, he moved to Amsterdam where he received numerous commissions for portraits. His many pupils included Ferdinand Bol, Govert Flinck and Carel Fabritius. In this period, Rembrandt develop a more powerful chiaroscuro, a looser brush and a greater sense of drama. He focused more on historical scenes, and made numerous etchings and drawings.
-                    </p>
-                    <p>
-                        In 1634, Rembrandt married Saskia Uylenburgh. They had a son, Titus, in 1641. Then a year later Saskia died. Later, in 1654, Rembrandt had a daughter with Hendrickje Stoffels. By now, he had accumulated huge debts and was forced to sell his house and property. He died in 1669 and was buried in Amsterdam's Westerkerk.
+                        In 1631, he moved to Amsterdam where he received numerous commissions for portraits. His many pupils included Ferdinand Bol, Govert Flinck and Carel Fabritius. In this period, Rembrandt develop a more powerful chiaroscuro, a looser brush and a greater sense of drama. He focused more on historical scenes, and made numerous etchings and drawings. In 1634, Rembrandt married Saskia Uylenburgh. They had a son, Titus, in 1641. Then a year later Saskia died. Later, in 1654, Rembrandt had a daughter with Hendrickje Stoffels. By now, he had accumulated huge debts and was forced to sell his house and property. He died in 1669 and was buried in Amsterdam's Westerkerk.
                     </p>
                 </div>
                 <p class="font-weight-bold btn btn-link">
@@ -40,42 +64,42 @@
             </div>
         </div>
         <div class="row">
-            <div class="col">
-                <h4>One of the paintings below doesn’t belongs to Rembrandt van Rijn, which one?</h4>
+            <div class="col my-3">
+                <h3>One of the paintings below doesn't belongs to Rembrandt van Rijn, which one?</h3>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm">
-                <img src="./images/The-Night-Watch-Rembrandt.jpg" class="img-fluid" alt="Responsive image">
+            <div class="col-md p-3">
+                <img src="./images/The-Night-Watch-Rembrandt.jpg" class="img-fluid myQuizImage" alt="The Night Watch">
             </div>
-            <div class="col-sm">
-                <img src="./images/Self-portrait-Rembrandt.jpg" class="img-fluid" alt="Responsive image">
+            <div class="col-md p-3">
+                <img src="./images/Self-portrait-Rembrandt.jpg" class="img-fluid myQuizImage" alt="Self portrait">
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm">
-                <img src="./images/The-Night-Watch-Rembrandt.jpg" class="img-fluid" alt="Responsive image">
+        <div class="row mb-3">
+            <div class="col-md p-3">
+                <img src="./images/Het-melkmeisje-Vermeer.jpg" class="img-fluid myQuizImage" alt="Het melkmeisje">
             </div>
-            <div class="col-sm">
-                <img src="./images/Self-portrait-Rembrandt.jpg" class="img-fluid" alt="Responsive image">
+            <div class="col-md p-3">
+                <img src="./images/Liggende-leeuw-Rembrandt.jpg" class="img-fluid myQuizImage" alt="Liggende leeuw">
             </div>
         </div>
     </section>
 
-    <!-- QUIZ ANSWER -->
-    <section class="container">
+    <!-- 3.QUIZ ANSWER -->
+    <section class="container d-none">
         <div class="row">
-            <div class="col">
-                <h4>Well done!</h4>
+            <div class="col my-3">
+                <h3>Well done!</h3>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm">
-                <p>The work "The Milkmaid" belongs to Johannes Vermeer</p>
-                <img src="./images/Self-portrait-Rembrandt.jpg" class="img-fluid" alt="Responsive image">
+            <div class="col-md mb-3">
+                <p>The work "The Milkmaid" belongs to <strong>Johannes Vermeer</strong>.</p>
+                <img src="./images/Het-melkmeisje-Vermeer.jpg" class="img-fluid" alt="Het melkmeisje">
             </div>
-            <div class="col-sm">
-                <h5>Johannes Vermeer</h5>
+            <div class="col-md">
+                <h4>Johannes Vermeer</h4>
                 <p>
                     Today Johannes Vermeer (1632-1675) is one of the most celebrated Dutch 17th century masters.
                 </p>
@@ -91,21 +115,44 @@
                 </p>
             </div>
         </div>
-        <div class="row">
+        <div class="row my-3">
             <div class="col text-center">
-                <button type="button" class="btn btn-dark">Next Question</button>
+                <button type="button" class="btn btn-primary px-5 btn-lg">Next Question</button>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER-02-->
-    <div class="bg-dark text-white">
-        <section class="container">
-            <div class="row">
-                <p class="small my-3">Copyright © 2020 Alex Panko | Images and the content belongs to the Rijksmuseum and udsed according to <a class="text-white" href="https://www.rijksmuseum.nl/en/data/policy"><u>The Rijksmuseum Open Data Policy</u></a></p>
+    <!-- 4. QUIZ REZULTS -->
+    <section class="d-none">
+        <div class="jumbotron jumbotron-fluid mySmallHeader pb-1" style="background-image: url(images/congratulations.jpg);">
+            <div class="container">
+              <h1 class="text-light">Congratulations!</h1>
             </div>
-        </section>
-    </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h4>You have in-depth knowledge of Dutch art history.</h4>
+                    <p class="my-3">Do you miss the original masterpieces? You can find them in Amsterdam in one of the world's most renowned art museums - The Rijksmuseum.</p>
+                    <div class="text-center my-5">
+                        <a href="https://www.rijksmuseum.nl/en/tickets/articles"><button type="button" class="btn btn-primary btn-lg px-3 m-1">Order your ticket online</button></a>
+                        <a href="https://www.rijksmuseum.nl/en/tickets/articles"><button type="button" class="btn btn-secondary btn-lg px-3 m-1">Take the quiz again</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5.FOOTER-->
+    <section class="bg-dark text-white mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <p class="small my-3">© 2020 Alex Panko | Images and the content belongs to the Rijksmuseum and used according to <a class="text-white" href="https://www.rijksmuseum.nl/en/data/policy"><u>The Rijksmuseum Open Data Policy</u></a></p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- BOOTSTRAP -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
