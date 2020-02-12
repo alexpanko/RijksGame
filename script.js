@@ -4,13 +4,16 @@ myStartQuiz.addEventListener('click', function () {
     document.getElementById('myQuizSection').classList.remove('d-none');
     document.getElementById('myHeroSection').classList.add('d-none');
     window.scrollTo(0, 0);
-    myStartGame();
 });
 
 class MyQuiz {
     constructor () {
         this.randomNumbers = [];
+        // this.randomNumbersForQuestions = //take first 10 from randomNumbers
+        // this.randomNumbersForAnswers = //take 2nd 10 from randomNumbers
         this.quizArray = [];
+        // this.quizArrayAnswers = []; //Array with answers
+
     }
     getTenRandomNumbers() {
         while(this.randomNumbers.length < 10){
@@ -21,16 +24,27 @@ class MyQuiz {
     createQuizArray() {
         let item;
         for (let i = 0; i < this.randomNumbers.length; i++) {
-            item = myArtistsAndImages[i];
+            item = myArtistsAndImages[this.randomNumbers[i]];
             this.quizArray.push(item);
         }
     }
 }
 
-const myQuiz = new MyQuiz()
-myQuiz.getTenRandomNumbers()
-console.log(myQuiz.randomNumbers)
+// const myQuiz = new MyQuiz()
+// myQuiz.getTenRandomNumbers()
+// console.log(myQuiz.randomNumbers)
 
+class MyGame {
+    createQuestion() {
+        document.getElementById('myName').innerHTML = myQuiz.quizArray[0].name
+    }
+}
+
+const myQuiz = new MyQuiz();
+myQuiz.getTenRandomNumbers();
+myQuiz.createQuizArray();
+const myGame = new MyGame();
+myGame.createQuestion();
 
 // class NewQuestion {
 //     constructor(artistTrue, imageTrue1, imageTrue2, imageTrue3, imageFalse, imageFalseName, artistFalse) {
@@ -51,14 +65,14 @@ console.log(myQuiz.randomNumbers)
 
 
 // 03 QUIZ GAME - CHOSE THE IMAGE
-function myStartGame() {
-    const myImageChoice = document.querySelectorAll(".myQuizImage");
-    for (const myImage of myImageChoice) {
-        myImage.addEventListener("click", function (e) {
-            e.currentTarget.classList.add('myOpacity');
-        });
-    };
-};
+// function myStartGame() {
+//     const myImageChoice = document.querySelectorAll(".myQuizImage");
+//     for (const myImage of myImageChoice) {
+//         myImage.addEventListener("click", function (e) {
+//             e.currentTarget.classList.add('myOpacity');
+//         });
+//     };
+// };
 
 
 
@@ -68,4 +82,3 @@ function myStartGame() {
 
 
     
-}
