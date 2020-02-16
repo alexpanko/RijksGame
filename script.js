@@ -149,6 +149,8 @@ class NextQuestion {
             document.getElementById('myQuizSection').classList.add('d-none');
             document.getElementById('myQuizAnswerSection').classList.add('d-none');
             document.getElementById('myGameOwer').classList.remove('d-none');
+            document.getElementById('myCounter2').innerHTML = counter;
+            document.getElementById('myCounter3').innerHTML = counter;
             }
             window.scrollTo(0, 0);
         });
