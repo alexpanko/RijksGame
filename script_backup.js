@@ -1,27 +1,17 @@
+let counter = "0";
+let questionOrder = 1;
+
 //Start the game - generate questions and answers
 class MyQuiz {
     constructor () {
-        this.counter = "0";
-        this.questionOrder = 1;
         this.randomNumbers = [];
         this.randomNumbersForQuestions = [];
         this.randomNumbersForAnswers = [];
         this.quizArray = [];
         this.quizArrayAnswers = []; 
-        this.takeTheQuizButton = document.getElementById('myStartQuizButton');
-        this.myQuestions = null;
-        this.initialise();
     }
-    initialise() {
-        this.getRandomNumbers();
-        this.createQuizArray();
-        this.createQuizArrayAnswers();
-        this.startQuiz();
-    }
-    //Get random numbers to create (shuffeled) quiestions and answers from data.js
-    getRandomNumbers() {
+    getTenRandomNumbers() {
         while(this.randomNumbers.length < 20){
-            //Possible (if get more data) to replace 20 with the number of objects in data.js. Currently - 20 artists.
             let r = Math.floor(Math.random() * 20);
             if(this.randomNumbers.indexOf(r) === -1) this.randomNumbers.push(r);
         }
@@ -42,20 +32,12 @@ class MyQuiz {
             this.quizArrayAnswers.push(item);
         }
     }
-    //Take the Quiz button - click to start
-    startQuiz() {
-        this.takeTheQuizButton.addEventListener('click', () => {
-            document.getElementById('myQuizSection').classList.remove('d-none');
-            document.getElementById('myHeroSection').classList.add('d-none');
-            window.scrollTo(0, 0);
-            this.myQuestions = new MyGame();
-            this.myQuestions.getImagesOrder();
-            this.myQuestions.createQuestion(0);
-        });
-    }
 }
 
 const myQuiz = new MyQuiz();
+myQuiz.getTenRandomNumbers();
+myQuiz.createQuizArray();
+myQuiz.createQuizArrayAnswers();
 
 //Update content
 class MyGame {
@@ -101,6 +83,19 @@ class MyGame {
     }
 }
 
+let myGame
+
+// START THE QUIZ
+const myStartQuiz = document.getElementById('myStartQuizButton');
+myStartQuiz.addEventListener('click', function () {
+    document.getElementById('myQuizSection').classList.remove('d-none');
+    document.getElementById('myHeroSection').classList.add('d-none');
+    window.scrollTo(0, 0);
+    myGame = new MyGame();
+    myGame.getImagesOrder();
+    myGame.createQuestion(0);
+});
+
 // QUIZ GAME - CHOSE THE IMAGE
 class SelectImage {
     constructor () {
@@ -113,10 +108,10 @@ class SelectImage {
             function chooseAnswer(e) {
                 if (onlyOneChoice == false) {
                     e.currentTarget.classList.add('myChoice');
-                if (e.currentTarget.alt === myQuiz.myQuestions.answer) {
+                if (e.currentTarget.alt === myGame.answer) {
                     document.getElementById('wellDone').innerHTML = "Well done!";
-                    myQuiz.counter++; 
-                    document.getElementById('myCounter').innerHTML = myQuiz.counter;
+                    counter++; 
+                    document.getElementById('myCounter').innerHTML = counter;
                 } else {
                     document.getElementById('wellDone').innerHTML = "Oops!";
                 }
@@ -141,23 +136,23 @@ class NextQuestion {
     }
     showNextQuestion () {
         this.nextQuestionButton.addEventListener('click', function () {
-            if (myQuiz.questionOrder < 10) {
-                myQuiz.myQuestions = new MyGame();
-                myQuiz.myQuestions.getImagesOrder();
-                myQuiz.myQuestions.createQuestion(myQuiz.questionOrder);
+            if (questionOrder < 10) {
+                myGame = new MyGame();
+                myGame.getImagesOrder();
+                myGame.createQuestion(questionOrder);
                 selectImage = new SelectImage;
                 selectImage.selectRightAnswer();
                 document.getElementById('myQuizAnswerSection').classList.add('d-none');
                 document.getElementsByClassName('myChoice')[0].classList.remove('myChoice');
                 document.getElementById('collapse').classList.remove('show');
                 document.getElementById('collapseAnswer').classList.remove('show');
-                myQuiz.questionOrder++;
+                questionOrder++;
             } else {
             document.getElementById('myQuizSection').classList.add('d-none');
             document.getElementById('myQuizAnswerSection').classList.add('d-none');
             document.getElementById('myGameOwer').classList.remove('d-none');
-            document.getElementById('myCounter2').innerHTML = myQuiz.counter;
-            document.getElementById('myCounter3').innerHTML = myQuiz.counter;
+            document.getElementById('myCounter2').innerHTML = counter;
+            document.getElementById('myCounter3').innerHTML = counter;
             }
             window.scrollTo(0, 0);
         });
