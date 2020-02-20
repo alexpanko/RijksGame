@@ -59,6 +59,13 @@ const myQuiz = new MyQuiz();
 
 
 //Preload images
+let quizImages = []
+// https://peaceful-spence-c77560.netlify.com/
+for (let i = 0; i < myQuiz.quizArray.length; i++) {
+    quizImages.push(myQuiz.quizArray[i].image1);
+    quizImages.push(myQuiz.quizArray[i].image2);
+    quizImages.push(myQuiz.quizArray[i].image3);
+}
 let images = [];
 function preload() {
     for (var i = 0; i < arguments.length; i++) {
@@ -66,23 +73,7 @@ function preload() {
         images[i].src = preload.arguments[i];
     }
 }
-let quizImages = []
-for (let i = 0; i < myQuiz.quizArray.length; i++) {
-    quizImages.push(myQuiz.quizArray[i].image1);
-    quizImages.push(myQuiz.quizArray[i].image2);
-    quizImages.push(myQuiz.quizArray[i].image3);
-}
-
-
-
-
-//-- usage --//
-// preload(
-//     "http://domain.tld/gallery/image-001.jpg",
-//     "http://domain.tld/gallery/image-002.jpg",
-//     "http://domain.tld/gallery/image-003.jpg"
-// )
-
+preload(quizImages);
 
 //Update content
 class MyGame {
