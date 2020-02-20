@@ -57,6 +57,33 @@ class MyQuiz {
 
 const myQuiz = new MyQuiz();
 
+
+//Preload images
+let images = [];
+function preload() {
+    for (var i = 0; i < arguments.length; i++) {
+        images[i] = new Image();
+        images[i].src = preload.arguments[i];
+    }
+}
+let quizImages = []
+for (let i = 0; i < myQuiz.quizArray.length; i++) {
+    quizImages.push(myQuiz.quizArray[i].image1);
+    quizImages.push(myQuiz.quizArray[i].image2);
+    quizImages.push(myQuiz.quizArray[i].image3);
+}
+
+
+
+
+//-- usage --//
+// preload(
+//     "http://domain.tld/gallery/image-001.jpg",
+//     "http://domain.tld/gallery/image-002.jpg",
+//     "http://domain.tld/gallery/image-003.jpg"
+// )
+
+
 //Update content
 class MyGame {
     constructor () {
