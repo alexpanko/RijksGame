@@ -76,6 +76,7 @@ function preload() {
 // for (let i = 0; i < quizImages.length; i++) {
 //     preload(quizImages[i]);
 // }
+preload(...quizImages)
 
 //Update content
 class MyGame {
