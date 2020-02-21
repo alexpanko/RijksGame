@@ -162,7 +162,7 @@ const myArtistsAndImages = [
         descriptionMore: "He later visited Paris, where he perfected his academic style of painting. He subsequently visited Germany, studying the German Romantic artists. Despite his training, Israëls did not devote his career to painting historical scenes. While recuperating from an illness at the Dutch fishing village of Zandvoort, he was appalled by the tragic lot of the fishermen and their families. His sober, restrained paintings depicting life in the fishing village earned him international fame. Critics compared his impasto brushwork, his warm colours and his use of chiaroscuro with the work of Rembrandt. Israëls taught numerous pupils, among them his son Isaac.",
         image1: "/images/Children-of-the-Sea-Israëls.jpg",
         image1Name: "Children of the Sea",
-        image2: "/images/Jewish-Wedding-Israëls.jpg",
+        image2: "/images/Jewish-Wedding-Israëls-large.jpg",
         image2Name: "Jewish Wedding",
         image3: "/images/The-Joy-of-Motherhood-Israëls.jpg",
         image3Name: "The Joy of Motherhood"
