@@ -35,3 +35,11 @@ html {
     opacity: 0.2;
 }
  
+@media (max-width: 600px) {
+    .myHeader {
+        height: 80vh;
+    }
+    .mySiteTitle {
+        font-size: 2.5rem;
+    }
+}
