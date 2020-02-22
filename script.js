@@ -2,7 +2,7 @@
 class MyQuiz {
     constructor () {
         this.counter = "0";
-        this.questionOrder = 1;
+        this.questionOrder = 0;
         this.randomNumbers = [];
         this.randomNumbersForQuestions = [];
         this.randomNumbersForAnswers = [];
@@ -54,6 +54,9 @@ class MyQuiz {
             this.quizImages.push(this.quizArray[i].image1);
             this.quizImages.push(this.quizArray[i].image2);
             this.quizImages.push(this.quizArray[i].image3);
+            this.quizImages.push(this.quizArrayAnswers[i].image1);
+            this.quizImages.push(this.quizArrayAnswers[i].image2);
+            this.quizImages.push(this.quizArrayAnswers[i].image3);
         }
     }
     //Preload quiz images step 2 (preload images)
@@ -68,9 +71,11 @@ class MyQuiz {
         this.takeTheQuizButton.addEventListener('click', () => {
             document.getElementById('myQuizSection').classList.remove('d-none');
             document.getElementById('myHeroSection').classList.add('d-none');
-            window.scrollTo(0, 0);
+            setTimeout(function(){window.scrollTo(0, 0)}, 200);
+            // window.scrollTo(0, 0);
             this.myQuestions = new MyQuestions();
-            this.myQuestions.createQuestion(0);
+            this.questionOrder++;
+            document.getElementById('questionOrder').innerHTML = this.questionOrder;
         });
     }
     //Add event listener on button 'next question' and remove style from selected image - runs only once for the game
@@ -78,12 +83,12 @@ class MyQuiz {
         this.nextQuestionButton.addEventListener('click', () => {
             if (this.questionOrder < 10) {
                 this.myQuestions = new MyQuestions();
-                this.myQuestions.createQuestion(this.questionOrder);
                 document.getElementById('myQuizAnswerSection').classList.add('d-none');
                 document.getElementsByClassName('myChoice')[0].classList.remove('myChoice');
                 document.getElementById('collapse').classList.remove('show');
                 document.getElementById('collapseAnswer').classList.remove('show');
                 this.questionOrder++;
+                document.getElementById('questionOrder').innerHTML = this.questionOrder;
             } else {
             document.getElementById('myQuizSection').classList.add('d-none');
             document.getElementById('myQuizAnswerSection').classList.add('d-none');
@@ -91,7 +96,8 @@ class MyQuiz {
             document.getElementById('myCounter2').innerHTML = this.counter;
             document.getElementById('myCounter3').innerHTML = this.counter;
             }
-            window.scrollTo(0, 0);
+            setTimeout(function(){window.scrollTo(0, 0)}, 200);
+            // window.scrollTo(0, 0);
         });
     }
 }
@@ -104,8 +110,16 @@ class MyQuestions {
         this.imagesOrder = [];
         this.answer = "";
         this.myImageChoice = document.querySelectorAll(".myQuizImage");
+        this.initialise();
+    }
+    initialise() {
         this.getImagesOrder();
         this.selectRightAnswer();
+        this.createQuestionTrueArtist(myQuiz.questionOrder);
+        this.createQuestionTrueImages(myQuiz.questionOrder);
+        this.createQuestionFalseImage(myQuiz.questionOrder);
+        this.createQuestionFalseArtist(myQuiz.questionOrder);
+        this.shuffleQuestionImages();
     }
     //Get random 4 numbers to shuffle answer options/ images
     getImagesOrder() {
@@ -114,33 +128,40 @@ class MyQuestions {
         if(this.imagesOrder.indexOf(r) === -1) this.imagesOrder.push(r);
         }
     }
-    //Create question in html - add content from data (DOM manipulator)
-    createQuestion(questionOrder) {
-        //Add artist name & description
+    //Create question: Add 'true' artist name & description
+    createQuestionTrueArtist(questionOrder) {
         document.getElementById('myName').innerHTML = myQuiz.quizArray[questionOrder].name;
         document.getElementById('myDescriptionLess').innerHTML = myQuiz.quizArray[questionOrder].descriptionLess;
         document.getElementById('myDescriptionMore').innerHTML = myQuiz.quizArray[questionOrder].descriptionMore;
         document.getElementById('myQuestionName').innerHTML = myQuiz.quizArray[questionOrder].name;
-        //Add 3 images from the artist
+    }
+    //Create question: Add 3 images from the 'true' artist
+    createQuestionTrueImages(questionOrder) {
         document.querySelectorAll('.myQuizImageBox img')[0].src = myQuiz.quizArray[questionOrder].image1;
         document.querySelectorAll('.myQuizImageBox img')[0].alt = myQuiz.quizArray[questionOrder].image1Name;
         document.querySelectorAll('.myQuizImageBox img')[1].src = myQuiz.quizArray[questionOrder].image2;
         document.querySelectorAll('.myQuizImageBox img')[1].alt = myQuiz.quizArray[questionOrder].image2Name;
         document.querySelectorAll('.myQuizImageBox img')[2].src = myQuiz.quizArray[questionOrder].image3;
         document.querySelectorAll('.myQuizImageBox img')[2].alt = myQuiz.quizArray[questionOrder].image3Name;
-        //Add answer - add 'false' artist name & description
+    }
+    //Create question: Add 'false' artist name & description
+    createQuestionFalseArtist(questionOrder) {
         document.getElementById('myNameAnswer').innerHTML = myQuiz.quizArrayAnswers[questionOrder].name;
         document.getElementById('myImageNameAnswer').innerHTML = myQuiz.quizArrayAnswers[questionOrder].name;
         document.getElementById('myDescriptionLessAnswer').innerHTML = myQuiz.quizArrayAnswers[questionOrder].descriptionLess;
         document.getElementById('myDescriptionMoreAnswer').innerHTML = myQuiz.quizArrayAnswers[questionOrder].descriptionMore;
-        //Add only one random images from the 'false' artist
+    }
+    //Create question: Add (only) one random images from the 'false' artist
+    createQuestionFalseImage(questionOrder) {
         let r = Math.floor(Math.random() * 3) + 1;
         document.querySelectorAll('.myQuizImageBox img')[3].src = myQuiz.quizArrayAnswers[questionOrder][`image${r}`];
         document.querySelectorAll('.myQuizImageBox img')[3].alt = myQuiz.quizArrayAnswers[questionOrder][`image${r}Name`];
         document.getElementById('myImageAltAnswer').innerHTML = myQuiz.quizArrayAnswers[questionOrder][`image${r}Name`];
         this.answer = myQuiz.quizArrayAnswers[questionOrder][`image${r}Name`];
         document.getElementById('myImageAnswer').src = myQuiz.quizArrayAnswers[questionOrder][`image${r}`];
-        // Randomise answers/ images 
+    }    
+    //Randomise answers/ images (shuffeling is happening in CSS)
+    shuffleQuestionImages () {
         document.querySelectorAll('.myQuizImageBox')[0].style.order = this.imagesOrder[0];
         document.querySelectorAll('.myQuizImageBox')[1].style.order = this.imagesOrder[1];
         document.querySelectorAll('.myQuizImageBox')[2].style.order = this.imagesOrder[2];

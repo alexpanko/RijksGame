@@ -43,3 +43,9 @@ html {
         font-size: 2.5rem;
     }
 }
+
+@media (max-width: 1450px) and (min-width: 1200px) {
+    .myQuizImageBox img {
+        width: 80%;
+    }
+}
