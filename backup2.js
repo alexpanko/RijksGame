@@ -1,4 +1,4 @@
-//START THE GAME - GENERATE QUESTIONS, ANSWERS AND ACTIVATE START/ NEXT BUTTONS
+//Start the game - generate questions and answers
 class MyQuiz {
     constructor () {
         this.counter = "0";
@@ -10,9 +10,6 @@ class MyQuiz {
         this.quizArrayAnswers = []; 
         this.takeTheQuizButton = document.getElementById('myStartQuizButton');
         this.myQuestions = null;
-        this.nextQuestionButton = document.getElementById('myNextQuestion');
-        this.quizImages = []; //preloader: all quiz images in one array
-        this.images = []; //preloader: placeholder for img to preload
         this.initialise();
     }
     initialise() {
@@ -20,9 +17,6 @@ class MyQuiz {
         this.createQuizArray();
         this.createQuizArrayAnswers();
         this.startQuiz();
-        this.showNextQuestion();
-        this.getArrayOfImages(); //preloader: get images to preload
-        this.preload(...this.quizImages); //preloader: preload images
     }
     //Get random numbers to create (shuffeled) quiestions and answers from data.js
     getRandomNumbers() {
@@ -48,22 +42,7 @@ class MyQuiz {
             this.quizArrayAnswers.push(item);
         }
     }
-    //Preload quiz images step 1 (prepare array with images)
-    getArrayOfImages () {
-        for (let i = 0; i < this.quizArray.length; i++) {
-            this.quizImages.push(this.quizArray[i].image1);
-            this.quizImages.push(this.quizArray[i].image2);
-            this.quizImages.push(this.quizArray[i].image3);
-        }
-    }
-    //Preload quiz images step 2 (preload images)
-    preload () {
-        for (var i = 0; i < arguments.length; i++) {
-            this.images[i] = new Image();
-            this.images[i].src = arguments[i];
-        }
-    }
-    //Add event listener on 'start quiz' button and get first question
+    //Take the Quiz button - click to start
     startQuiz() {
         this.takeTheQuizButton.addEventListener('click', () => {
             document.getElementById('myQuizSection').classList.remove('d-none');
@@ -71,39 +50,61 @@ class MyQuiz {
             window.scrollTo(0, 0);
             this.myQuestions = new MyQuestions();
             this.myQuestions.createQuestion(0);
-        });
-    }
-    //Add event listener on button 'next question' and remove style from selected image - runs only once for the game
-    showNextQuestion () {
-        this.nextQuestionButton.addEventListener('click', () => {
-            if (this.questionOrder < 10) {
-                this.myQuestions = new MyQuestions();
-                this.myQuestions.createQuestion(this.questionOrder);
-                document.getElementById('myQuizAnswerSection').classList.add('d-none');
-                document.getElementsByClassName('myChoice')[0].classList.remove('myChoice');
-                document.getElementById('collapse').classList.remove('show');
-                document.getElementById('collapseAnswer').classList.remove('show');
-                this.questionOrder++;
-            } else {
-            document.getElementById('myQuizSection').classList.add('d-none');
-            document.getElementById('myQuizAnswerSection').classList.add('d-none');
-            document.getElementById('myGameOwer').classList.remove('d-none');
-            document.getElementById('myCounter2').innerHTML = this.counter;
-            document.getElementById('myCounter3').innerHTML = this.counter;
-            }
-            window.scrollTo(0, 0);
+            this.myQuestions.showNextQuestion();
         });
     }
 }
 
 const myQuiz = new MyQuiz();
 
-//GET NEW QUESTION - UPDATE CONTENT (ADD QUESTION CONTENT FROM DATA TO HTML)
+
+//Preload images - with class
+// class PreloadImages {
+//     constructor () {
+//         this.quizImages = [];
+//         this.images = [];
+//         this.getArrayOfImages();
+//         this.preload(...this.quizImages);
+//     }
+//     getArrayOfImages () {
+//         for (let i = 0; i < myQuiz.quizArray.length; i++) {
+//             this.quizImages.push(myQuiz.quizArray[i].image1);
+//             this.quizImages.push(myQuiz.quizArray[i].image2);
+//             this.quizImages.push(myQuiz.quizArray[i].image3);
+//         }
+//     }
+//     preload () {
+//         for (var i = 0; i < arguments.length; i++) {
+//             this.images[i] = new Image();
+//             this.images[i].src = preload.arguments[i];
+//         }
+//     }
+// }
+// const preloadImages = new PreloadImages();
+
+// Preload images
+let quizImages = [];
+for (let i = 0; i < myQuiz.quizArray.length; i++) {
+    quizImages.push(myQuiz.quizArray[i].image1);
+    quizImages.push(myQuiz.quizArray[i].image2);
+    quizImages.push(myQuiz.quizArray[i].image3);
+};
+let images = [];
+function preload() {
+    for (var i = 0; i < arguments.length; i++) {
+        images[i] = new Image();
+        images[i].src = preload.arguments[i];
+    }
+};
+preload(...quizImages);
+
+//Update content (add question content from data to html)
 class MyQuestions {
     constructor () {
         this.imagesOrder = [];
         this.answer = "";
         this.myImageChoice = document.querySelectorAll(".myQuizImage");
+        this.nextQuestionButton = document.getElementById('myNextQuestion');
         this.getImagesOrder();
         this.selectRightAnswer();
     }
@@ -168,5 +169,26 @@ class MyQuestions {
                 }    
             }
         }
+    }
+    //Add event listener on button 'next question' and remove style from selected image - runs only once for the game
+    showNextQuestion () {
+        this.nextQuestionButton.addEventListener('click', function () {
+            if (myQuiz.questionOrder < 10) {
+                myQuiz.myQuestions = new MyQuestions();
+                myQuiz.myQuestions.createQuestion(myQuiz.questionOrder);
+                document.getElementById('myQuizAnswerSection').classList.add('d-none');
+                document.getElementsByClassName('myChoice')[0].classList.remove('myChoice');
+                document.getElementById('collapse').classList.remove('show');
+                document.getElementById('collapseAnswer').classList.remove('show');
+                myQuiz.questionOrder++;
+            } else {
+            document.getElementById('myQuizSection').classList.add('d-none');
+            document.getElementById('myQuizAnswerSection').classList.add('d-none');
+            document.getElementById('myGameOwer').classList.remove('d-none');
+            document.getElementById('myCounter2').innerHTML = myQuiz.counter;
+            document.getElementById('myCounter3').innerHTML = myQuiz.counter;
+            }
+            window.scrollTo(0, 0);
+        });
     }
 }
